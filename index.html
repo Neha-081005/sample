@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FujiFilm Navbar</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <style>
+        /* Hover Dropdown CSS */
+        .dropdown:hover .dropdown-menu {
+            display: block;
+            margin-top: 0;
+            /* Remove gap so it stays visible */
+        }
+
+        body {
+            margin: 0px;
+        }
+
+        .navbar-divider {
+            border-left: 1px solid #ccc;
+            margin: 0 15px;
+            height: 30px;
+        }
+
+        .navbar-nav {
+            align-items: center;
+        }
+
+        .nav-link {
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+
+        .nav-item li:hover {
+            color: maroon;
+            text-decoration: underline;
+        }
+
+        .nav-item a:hover {
+            color: maroon;
+            text-decoration: underline;
+        }
+
+        .sub-nav {
+            background-color: #1f1f1f;
+            color: white;
+            padding: 10px 40px;
+            font-size: 14px;
+        }
+
+        .sub-nav a {
+            color: white;
+            margin-right: 20px;
+            display: inline-block;
+        }
+
+        .sub-nav a.active {
+            font-weight: bold;
+        }
+
+        .breadcrumb-custom {
+            background-color: transparent;
+            margin: 10px 40px;
+            font-size: 13px;
+        }
+
+        .breadcrumb-custom a {
+            color: #999;
+            text-decoration: none;
+        }
+
+        .breadcrumb-custom .breadcrumb-item.active {
+            color: #333;
+        }
+
+        .sub-nav-toggle {
+            display: none;
+            background-color: #1f1f1f;
+            color: white;
+
+            padding: 10px 40px;
+            border: none;
+            width: 100%;
+            font-size: 16px;
+            text-align: center;
+        }
+
+        .sub-nav-toggle i {
+            float: right;
+        }
+
+
+
+        .breadcrumb-item,
+        .breadcrumb-item a {
+            color: rgb(11, 1, 1);
+        }
+
+        .breadcrumb-itemactive {
+            color: white;
+        }
+
+        .container {
+            display: flex;
+            align-items: center;
+            max-width: 100%;
+            height: 100vh;
+        }
+
+        .carousel-item {
+            height: 100vh;
+        }
+
+        .carousel-item img {
+            object-fit: cover;
+            height: 100%;
+        }
+
+        .xhalf-overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-size: 4rem;
+            font-family: 'Cursive', sans-serif;
+            z-index: 10;
+            text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.6);
+        }
+
+        @media (max-width: 768px) {
+            .carousel-item {
+                height: auto;
+            }
+
+            .xhalf-overlay {
+                font-size: 2rem;
+            }
+        }
+
+        .container img {
+            margin: 0%;
+        }
+
+        .video-title {
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        .video-container {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%;
+            /* 16:9 Aspect Ratio */
+            height: 0;
+            overflow: hidden;
+        }
+
+        .video-container iframe,
+        .video-container video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        .title {
+            justify-content: center;
+        }
+
+        .picture1 {
+            display: grid;
+            grid-template-columns: 50%;
+        }
+
+
+        .perfect-grid {
+            display: flex;
+            gap: 200px;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 20px 20px;
+            flex-wrap: wrap;
+        }
+
+        .images-box {
+            width: 200px;
+            font-family: "Poppins", sans-serif;
+        }
+
+        .images-box img {
+            width: 100%;
+            height: auto;
+            display: block;
+            margin-top: 100px;
+            margin-right: 1000px;
+        }
+
+
+        .image-box {
+            width: 500px;
+            font-family: "Poppins", sans-serif;
+        }
+
+        .image-box img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .image-box .caption {
+            font-size: 2rem;
+        }
+
+        .credit {
+            font-size: 0.75rem;
+            color: #777;
+            margin-top: 5px;
+            text-align: right;
+        }
+
+        .caption {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-top: 15px;
+            color: #000;
+            text-align: left;
+        }
+
+        .photo-section {
+            padding: 50px 20px;
+            font-family: "Poppins", sans-serif;
+            text-align: center;
+        }
+
+        .photo-grid {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+
+        .text {
+            margin-top: 10px;
+            margin-left: 200px;
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #000;
+        }
+
+        .photo1-box {
+            width: 400px;
+        }
+
+        .photo2-box {
+            width: 400px;
+        }
+
+        .photo3-box {
+            width: 400px;
+        }
+
+        .photo1-box img {
+            width: 70%;
+            height: auto;
+            display: block;
+            margin-left: 200px;
+            margin-top: 90px;
+        }
+
+        .photo2-box img {
+            width: 70%;
+            height: auto;
+            display: block;
+            margin-left: 150px;
+        }
+
+        .photo3-box img {
+            width: 70%;
+            height: auto;
+            display: block;
+            margin-top: 20px;
+        }
+
+        .credit {
+            font-size: 0.75rem;
+            color: #777;
+            margin-top: 5px;
+            text-align: right;
+        }
+
+        .credit2 {
+            font-size: 0.75rem;
+            color: #777;
+
+        }
+
+        .caption-single {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-left: 500px;
+            margin-top: 0px;
+            color: #000;
+        }
+
+@media (max-width: 991.98px) {
+  .photo1-box img,
+  .photo2-box img,
+  .photo3-box img {
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 30px;
+  }
+
+  .caption-single {
+    text-align: center;
+    margin-left: 0;
+    font-size: 1.5rem;
+  }
+}
+
+/* Small screens (phones, ≤767.98px) */
+@media (max-width: 767.98px) {
+  .photo1-box,
+  .photo2-box,
+  .photo3-box {
+    width: 100%;
+  }
+
+  .photo1-box img,
+  .photo2-box img,
+  .photo3-box img {
+    width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 20px;
+  }
+
+  .caption-single {
+    font-size: 1.3rem;
+    margin-left: 0;
+    text-align: center;
+  }
+}
+
+        .wp-block-image.aligncenter.size-full {
+            width: 100%;
+        }
+
+        .wp-block-image.aligncenter {
+            display: block;
+            margin: auto;
+            text-align: center;
+        }
+
+        .has-text-align-center {
+            text-align: center !important;
+        }
+
+        #block_aa416987fc92f0c9c8ef1fb0ab648bab.wp-block-spacer {
+            height: 100px;
+        }
+
+        .mx-0 {
+            max-width: 0 !important;
+        }
+
+        .carousel-control-prev-icon,
+        .carousel-control-next-icon {
+            background-color: white;
+            border-radius: 50%;
+            padding: 20px;
+        }
+
+        .footer {
+            background-color: #1c1c1c;
+            color: white;
+            padding: 40px 20px 20px 20px;
+        }
+
+        .footer h5 {
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+        }
+
+        .footer ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .footer ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        .footer-icons i {
+            font-size: 20px;
+            margin-right: 10px;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #555;
+            padding-top: 20px;
+            margin-top: 20px;
+            font-size: 14px;
+        }
+
+        .footer-bottom .links a {
+            color: white;
+            margin: 0 15px;
+            text-decoration: none;
+        }
+
+        .footer-bottom .links a:hover {
+            text-decoration: underline;
+        }
+
+        .brand-logo {
+            height: 30px;
+            vertical-align: middle;
+        }
+
+        @media screen and (max-width: 767px) {
+            #block_aa416987fc92f0c9c8ef1fb0ab648bab.wp-block-spacer {
+                height: 70px;
+            }
+        }
+    </style>
+
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-white m-0">
+        <a class="navbar-brand" href="#">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSntJ3-RPLsGcqv_7PG2ucBt71TWaH4u4HCKw&s"
+                width="30" height="30" alt="Logo" />
+            FUJIFILM
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse justify-content-center" id="navbarNavDropdown">
+            <ul class="navbar-nav">
+                <!-- Products dropdown -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="productsDropdown">Products</a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="#">Cameras</a>
+                        <a class="dropdown-item" href="#">Lenses</a>
+                        <a class="dropdown-item" href="#">Accessories</a>
+                        <a class="dropdown-item" href="#">Software</a>
+                    </div>
+                </li>
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="productsDropdown">Support</a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="#">Download</a>
+                        <a class="dropdown-item" href="#">Manuals</a>
+                        <a class="dropdown-item" href="#">Compatibility</a>
+                        <a class="dropdown-item" href="#">More Links</a>
+                    </div>
+                </li>
+
+                <li class="nav-item"><a class="nav-link" href="#">News</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">Events</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">Promotions</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">Shop</a></li>
+
+                <div class="navbar-divider"></div>
+
+                <!-- X-Photographer dropdown -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="xPhotoDropdown">X-Photographer</a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="#">Galleries</a>
+                        <a class="dropdown-item" href="#">Photographies</a>
+                    </div>
+                </li>
+
+                <li class="nav-item"><a class="nav-link" href="#">X Stories</a></li>
+
+                <div class=" region-flag mx-5" style="color:black;">
+                    <a style="color:#343a40;font-weight: bolder;" href="#"
+                        class="region-flag d-flex align-items-center">
+                        <i style="color:#343a40;" class="fa-solid fa-globe"></i>COUNTRY / REGION
+                    </a>
+                </div>
+
+            </ul>
+
+
+        </div>
+
+
+    </nav>
+
+    <!-- Sub Navbar Toggle for Mobile -->
+    <button class="sub-nav-toggle d-lg-none" type="button" data-toggle="collapse" data-target="#subNavCollapse"
+        aria-expanded="false" aria-controls="subNavCollapse">
+        Menu <i class="fa-solid fa-angle-down"></i>
+    </button>
+
+    <!-- Sub Navbar (Collapsible on mobile) -->
+    <div class="sub-nav collapse d-lg-block m-0" id="subNavCollapse">
+        <a href="#" class="active">X half</a>
+        <a href="#">Overview</a>
+        <a href="#">Virtual Experience</a>
+        <a href="#">Specifications</a>
+        <a href="#">Gallery</a>
+        <a href="#">Accessories / Software</a>
+    </div>
+
+    <div style="background-color: #00000071;">
+        <div>
+            <nav aria-label="breadcrumb" class="p-3"></nav>
+            <ol class="breadcrumb m-0 ">
+                <li class="breadcrumb-item">
+                    <i class="fas fa-home"></i>
+                </li>
+                <li class="breadcrumb-item"><a href="#">Cameras</a></li>
+                <li class="breadcrumb-item active" aria-current="page" style="color: rgb(9, 1, 1);">X half</li>
+            </ol>
+            </nav>
+        </div>
+
+    </div>
+
+    <div id="carouselExampleInterval" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active" data-interval="5000">
+                <div class="container-fluid background-color:#00000071">
+                    <div class="row   d-flex bg-dark">
+
+                        <div class="col-12 col-md-6 ">
+
+                            <div class=" w-100">
+                                <a href="">
+                                    <img src="https://fujifilm-x.b-cdn.net/wp-content/uploads/2025/05/assets_2-min.png?width=1268&height=845&quality=85&sharpen=1"
+                                        alt="" class="d-block w-100" />
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-6 ">
+                            <div class=" w-100">
+                                <a href="">
+                                    <img src="https://fujifilm-x.b-cdn.net/wp-content/uploads/2025/05/assets_1-min.png?width=1268&height=845&quality=85&sharpen=1"
+                                        alt="" class="d-block w-100" />
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="font-family:cursive;" class="xhalf-overlay">X-half</div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    </div>
+
+
+    <div class="title">
+        <figure class="wp-block-image aligncenter size-full is-active"><img loading="lazy" decoding="async" width="238"
+                height="88"
+                src="https://fujifilm-x.b-cdn.net/wp-content/uploads/2025/05/x-half-black-logo.png?width=238&amp;height=88"
+                alt="" class="wp-image-274079" data-recalc-dims="1"></figure>
+
+
+        <div style="height:30px" aria-hidden="true" class="wp-block-spacer is-active"></div>
+        <p class="has-text-align-center is-active">Alongside Fujifilm’s unique Film Simulation modes, X half adds new
+            creative opportunities with film-inspired filters.<br>It’s never been easier to make your mark on every
+            frame.</p>
+        <div class="perfect-grid">
+            <div class="images-box">
+                <img src="https://fujifilm-x.b-cdn.net/wp-content/uploads/2025/05/Ben-Savage-X-half-003.jpg?width=1152&height=1536"
+                    alt="">
+                <div class="credit">©Ben Savage</div>
+                <div class="caption">Analog-Inspired Filters</div>
+            </div>
+            <div class="image-box">
+                <img src="https://fujifilm-x.b-cdn.net/wp-content/uploads/2025/05/Ben-Savage-X-half_2in1_1-1-scaled-1.webp?width=1024"
+                    alt="">
+                <div class="credit">©Pawel Wrona</div>
+                <div class="caption">2-in-1</div>
+            </div>
+        </div>
+        <div class="photo-section">
+            <div class="photo-grid">
+                <div class="photo1-box">
+                    <img src="https://fujifilm-x.b-cdn.net/wp-content/uploads/2025/05/DSCF0314.jpg?width=1152&height=1536"
+                        alt="">
+                    <div class="credit">©Luke Davis</div>
+                    <div class="text">Grain Effect</div>
+                </div>
+                <div class="photo2-box">
+                    <img src="https://fujifilm-x.b-cdn.net/wp-content/uploads/2025/05/EDIT-DSCF7242-kopiera.jpg?width=1152&height=1536"
+                        alt="">
+                    <div class="credit">©Karl Löweberg</div>
+                </div>
+                <div class="photo3-box">
+                    <img src="https://fujifilm-x.b-cdn.net/wp-content/uploads/2025/05/Nicole-Russo3.jpg?width=1152&height=1536"
+                        alt="">
+                    <div class="credit2">©Nicole Russo</div>
+                </div>
+            </div>
+            <div class="caption-single">Film Simulation</div>
+        </div>
+
+
+
+        <div class="container-fluid bg-dark">
+            <h1 class="video-title">Half the Size, Twice the Story</h1>
+
+            <div class="video-container">
+                <!-- Use video tag for local video -->
+                <video controls poster="thumbnail.jpg">
+                    <source src="X half Promotional Video  FUJIFILM.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+
+                <!-- OR embed YouTube / Vimeo like below:
+    <iframe src="https://www.youtube.com/embed/your_video_id" allowfullscreen></iframe>
+    -->
+            </div>
+        </div>
+
+
+
+        <div>
+            <div class="story-section bg-dark" style="text-align: center;">
+                <h2 style="color: white;">Create Your Own Story</h2>
+                <div class="underline"></div>
+                <p style="color: white;">
+                    X half lets you explore colors, textures, and moods – express your vision,<br /> create your own
+                    story.
+                </p>
+                <div class="d-flex justify-content-center align-items-center">
+                    <div id="carouselExampleControls" class="carousel slide w-100" data-ride="carousel"
+                        style="max-width: 400px;">
+                        <div class="carousel-inner text-center">
+                            <div class="carousel-item active">
+                                <img src="https://fujifilm-x.b-cdn.net/wp-content/uploads/2025/05/Ben-Savage-X-half-007.jpg?width=600&height=800"
+                                    class="img-fluid mx-auto d-block" alt="Image 1">
+                                <p class="text-muted mt-3 small">©Ben Savage / LIGHT LEAK</p>
+                                <div class="info-section d-flex">
+                                    <img src="https://fujifilm-x.b-cdn.net/wp-content/uploads/2025/05/Group-221.png?width=144&height=108"
+                                        alt="">
+                                    <div>
+                                        <h2 style="color: white;">Analog-Inspired Filters</h2>
+                                        <p style="color: white;">
+                                            Light leaks, expired film, double exposure, and other analog-inspired
+                                            filters offer a fresh take
+                                            on
+                                            vintage aesthetics.
+                                            Find the look that resonates with you.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="carousel-item">
+                                <img src="https://fujifilm-x.b-cdn.net/wp-content/uploads/2025/05/Mallain.jpg?width=600&height=800"
+                                    class="img-fluid mx-auto d-block" alt="Image 2">
+                                <p class="text-muted mt-3 small">©Mallain</p>
+                                <div class="info-section d-flex">
+                                    <img src="https://fujifilm-x.b-cdn.net/wp-content/uploads/2025/05/Group-217.png?width=144&height=108"
+                                        alt="">
+                                    <div>
+                                        <h2 style="color: white;">Grain Effect</h2>
+                                        <p style="color: white;">
+                                            Grain Effect adds film-like grain to your images, adding an extra level of
+                                            creativity to your
+                                            everyday
+                                            image making
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="carousel-item">
+                                <img src="https://fujifilm-x.b-cdn.net/wp-content/uploads/2025/05/DSCF6421.jpg?width=600&height=800"
+                                    class="img-fluid mx-auto d-block" alt="Image 3">
+                                <p class="text-muted mt-3 small">©Tom Baumgaertel/Velvia</p>
+                                <div class="info-section d-flex">
+                                    <img src="https://fujifilm-x.b-cdn.net/wp-content/uploads/2025/05/Group-289.png?width=97&height=129"
+                                        alt="">
+                                    <div>
+                                        <h2 style="color: white;">3:4 Vertical Framing</h2>
+                                        <p style="color: white;">
+                                            The foundation of X half. A compositional style set to become the new
+                                            standard. You can add a
+                                            date
+                                            stamp to your images
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="carousel-item">
+                                <img src="https://fujifilm-x.b-cdn.net/wp-content/uploads/2025/05/assets_17-min.png?width=1024&height=683"
+                                    class="img-fluid mx-auto d-block, max-height:800px" alt="Image 3">
+                                <p class="text-muted mt-3 small">©Luke Davis</p>
+                                <div class="info-section d-flex">
+                                    <img src="https://fujifilm-x.b-cdn.net/wp-content/uploads/2025/05/Group-273.png?width=184&height=103"
+                                        alt="">
+                                    <div>
+                                        <h2 style="color: white;">2-in-1</h2>
+                                        <p style="color: white;">
+                                            Combine two moments - stills or video - into a single frame. Use the Frame
+                                            Advance Lever or
+                                            create
+                                            on the app.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="carousel-item">
+                                <img src="https://fujifilm-x.b-cdn.net/wp-content/uploads/2025/05/JP_Kan-Mimura_Single_15-scaled.jpg?width=600&height=800"
+                                    class="img-fluid mx-auto d-block" alt="Image 4">
+                                <p class="text-muted mt-3 small">©Kan Mimura/PROVIA</p>
+                                <div class="info-section d-flex">
+                                    <img src="https://fujifilm-x.b-cdn.net/wp-content/uploads/2025/05/Group-244.png?width=105&height=153"
+                                        alt="">
+                                    <div>
+                                        <h2 style="color: white;">Film Simulations</h2>
+                                        <p style="color: white;">
+                                            Expand your creative options by choosing a Film Simulation to match your
+                                            vision. Each has its
+                                            own
+                                            unique color palette, all inspired by analog film.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <a class="carousel-control-prev" href="#carouselExampleControls" role="button"
+                            data-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="carousel-control-next" href="#carouselExampleControls" role="button"
+                            data-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+
+
+            <footer class="footer container-fluid">
+                <div class="row text-left row-cols-1 row-cols-md-4">
+
+                    <div class="col mb-4">
+                        <h5>Products</h5>
+                        <ul>
+                            <li><a href="#">Cameras</a></li>
+                            <li><a href="#">Lenses</a></li>
+                            <li><a href="#">Accessories</a></li>
+                            <li><a href="#">Software</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="col mb-4">
+                        <h5>Support</h5>
+                        <ul>
+                            <li><a href="#">Downloads</a></li>
+                            <li><a href="#">Manuals</a></li>
+                            <li><a href="#">Compatibility</a></li>
+                            <li><a href="#">FAQ</a></li>
+                            <li><a href="#">Product Security Information</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="col mb-4">
+                        <h5>More Links</h5>
+                        <ul>
+                            <li><a href="#">News</a></li>
+                            <li><a href="#">X-Photographers</a></li>
+                            <li><a href="#">X Stories</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="col mb-4">
+                        <h5>Follow Us</h5>
+                        <p><strong>Global</strong></p>
+                        <div class="footer-icons mb-2">
+                            <a href="#"><i class="fab fa-facebook-square"></i></a>
+                            <a href="#"><i class="fab fa-youtube"></i></a>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="footer-bottom d-flex flex-column flex-md-row justify-content-between align-items-center">
+                    <div class="d-flex align-items-center mb-2 mb-md-0">
+                        <img src="https://www.fujifilm-x.com/wp-content/themes/fujifilm/source/images/fujifilm-footer.png"
+                            alt="Fujifilm Logo" class="brand-logo mr-2">
+                        <span>©FUJIFILM Corporation.</span>
+                    </div>
+                    <div class="links">
+                        <a href="#">CONTACT</a>
+                        <a href="#">PRIVACY POLICY</a>
+                        <a href="#">TERMS OF USE</a>
+                        <a href="#">COOKIE SETTINGS</a>
+                    </div>
+                </div>
+            </footer>
+
+
+
+            <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
